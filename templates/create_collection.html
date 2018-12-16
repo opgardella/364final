@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+<h2>Create a new headline collection</h2>
+
+
+{% block navigation %}
+ {{ super() }}
+{% endblock %}
+
+{% block maincontent %}
+
+<form action="" method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.name.label }} {{ form.name() }}
+	{{ form.selected_articles.label }} {{ form.selected_articles() }}
+	{{ form.submit.label }}{{ form.submit() }}
+</form>
+
+<ul>
+  {% for error in form.name.errors %}
+    <strong>*{{ error }}*</strong>
+  {% endfor %}
+</ul>
+
+{% endblock %}

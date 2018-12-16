@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+
+<!-- <h1> News <h1> -->
+
+<div class="page-header">
+    <h1>{% if num_news %}
+          {{ num_news }}
+        {% else %}
+          0
+        {% endif %}
+        possible news headlines saved.
+    </h1>
+</div>
+
+<h1>News Form</h1>
+<p>Find the most recent article title based on a keyword.</p>
+<p><i>Example keywords: New York, health, San Francisco</i></p>
+<p>Note: The articles are constantly being updated, so if you input the same keyword more than once, it may be the same or it may change depending on if it has been updated yet in the news. It is recommended to not use the same keyword within 24 hrs.</p>
+
+<form action="{{ url_for('news') }}" method="POST">
+    {{ form.keyword.label() }}{{ form.keyword() }}<br><br>
+    {{ form.submit() }}
+    <ul>
+      {% for error in form.keyword.errors %}
+        <strong>{{ error }}</strong>
+      {% endfor %}
+    </ul>
+    {{ form.hidden_tag() }}
+</form>
+
+<div>
+{% for me in get_flashed_messages() %}
+    <strong>* {{ me }} *</strong>
+{% endfor %}
+</div>
+
+
+{% endblock %}

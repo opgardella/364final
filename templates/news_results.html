@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+
+<h1>Headlines Found</h1>
+
+<div class="page-header">
+    <h1>{% if num_news %}
+          {{ num_news }}
+        {% else %}
+          0
+        {% endif %}
+        possible news headlines saved.
+    </h1>
+</div>
+
+{% for n in news %}
+    <p>{{ n }}</p>
+{% endfor %}
+
+{% if not news %}
+    There are no news headlines to show yet.
+    Add headlines by going to the <a href="{{ url_for('news') }}">news form</a>
+{% endif %}
+
+{% endblock %}

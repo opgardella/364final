@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block maincontent %}
+
+<h1>Sources Form</h1>
+<p>This page functions as a collection of all the sources where all collective users of this application get their news from.<p>
+
+<p>Use the form below to input sources where you get your news from (one at a time) to add them to the list! If another user has already added that as a news source, it will notify you that it has already been added.<p>
+
+<form action="{{ url_for('sources') }}" method="POST">
+    {{ form.source.label() }}{{ form.source() }}<br><br>
+    <ul>
+      {% for error in form.source.errors %}
+        <strong>{{ error }}</strong>
+      {% endfor %}
+    </ul>
+    {{ form.submit() }}
+    {{ form.hidden_tag() }}
+</form>
+
+<div>
+{% for me in get_flashed_messages() %}
+    <strong>* {{ me }} *</strong>
+{% endfor %}
+</div>
+
+<h3>Sources Logged<h3>
+  <ul>
+  {% for s in all_sources %}
+      <li>{{ s }}<br>
+  {% endfor %}
+  </ul>
+
+
+
+{% endblock %}

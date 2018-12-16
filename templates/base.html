@@ -1,0 +1,45 @@
+{% if current_user.is_authenticated %}
+    <a href="{{ url_for('logout') }}">Sign out <b>{{current_user.username}}</b></a>
+{% else %}
+    <a href="{{ url_for('login') }}">Sign In</a>
+{% endif %}
+<br>
+<br>
+
+{% block navigation %}
+<h3>Navigation</h3>
+<ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('news') }}">News</a></li>
+    <li><a href="{{ url_for('news_results') }}">News Results</a></li>
+    {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('sources') }}">Sources</a></li>
+      <li><a href="{{ url_for('create_collection') }}">Create Collection</a></li>
+      <li><a href="{{ url_for('collections') }}">Collections</a></li>
+    {% endif %}
+</ul>
+<p>--------</p><br>
+{% endblock %}
+
+
+{% block maincontent %}
+
+<h1>Welcome to the News App!</h1>
+
+<p>
+  This application will help you find the most recent news article headlines based on a keyword using the <a href="{{ url_for('news') }}">news form</a>. Once you have found some headlines, you can view all the <a href="{{ url_for('news_results') }}">News results</a> so far.
+</p>
+<p>
+  Once you log in (you can create an account if you don't have one yet), you can also create collections of articles you have found as well as log the sources where you get your news from, and see the collective list of where all users of this app get their news. 
+</p>
+<p>
+  Be sure to <a href="{{ url_for('login') }}">log in</a> to get all the functionality of this app, or <a href="{{ url_for('register') }}">create an account</a> if you don't have one yet.
+</p>
+
+<br>
+<br>
+<br>
+
+<p>This app is powered by <i><a href="https://newsapi.org/docs/" target="_blank">News Api</a></i></p>
+
+{% endblock %}

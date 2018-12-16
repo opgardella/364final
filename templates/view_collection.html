@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+<!-- {% block navigation %}
+ {{ super() }}
+{% endblock %} -->
+
+{% block maincontent %}
+
+<h2>{{ collection.name }}</h2>
+
+
+<!-- {% for h in headlines %}
+      {{ h.headline }}
+    <br><br>
+{% endfor %} -->
+
+<ul>
+{% for h in headlines %}
+    <li>
+        {{ h.headline }}
+        <form method="GET" action="/update/{{ h.headline }}">
+          {{ form.hidden_tag() }}
+          {{ form.update() }}
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+ {{ super() }}
+{% endblock %}
+
+{% block maincontent %}
+
+<h2>My collections</h2>
+
+<!-- <ul>
+{% for c in collections %}
+    <li><a href="http://localhost:5000/collection/{{ c.id }}">{{ c.name }}</a></li>
+{% endfor %}
+</ul> -->
+
+{% if not collections %}
+There are no collections to show.
+
+{% else %}
+
+<ul>
+{% for c in collections %}
+    <li>
+        <a href="http://localhost:5000/collection/{{ c.id }}">{{ c.name }}</a>
+        <form method="POST" action="/delete/{{ c.name }}">
+          {{ form.hidden_tag() }}
+          {{ form.delete() }}
+        </form>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+<div>
+{% for message in get_flashed_messages() %}
+<strong> *{{ message }}* </strong>
+{% endfor %}
+</div>
+
+
+{% endblock %}
